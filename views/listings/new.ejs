@@ -1,0 +1,52 @@
+<% layout("layouts/boilerplate") %>
+<% if (error && error.length) { %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= error[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<div class="row">
+    <div class="col-8 offset-2">
+    <br>
+    <h3 style="color: rgb(152, 60, 77);">Add a New Stay</h3><br>
+    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data"> <!--multipart to submit file data ex image, default:urlencoded -->
+        <div>
+            <label for="title" class="form-label">Enter Title</label>
+            <input name="listing[title]" placeholder="Enter title" type="text" id="title" class="form-control" required>
+            <div class="valid-feedback">Title looks good</div>
+        </div>
+        <br>
+        <div>
+            <label for="desc" class="form-label">Enter Description</label>
+            <textarea name="listing[description]" placeholder="Enter description" type="text" id="desc" class="form-control" required></textarea>
+            <div class="invalid-feedback">Please add a short description.</div>
+        </div>
+        <br>
+        <div>
+            <label for="image" class="form-label" >Enter Image</label>
+            <input name="listing[image]" type="file" id="image" class="form-control" required>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+            <label for="price" class="form-label">Enter Price</label>
+            <input name="listing[price]" placeholder="Enter price" type="number" id="price" class="form-control" required>
+            <div class="invalid-feedback">Price shall be a valid number</div>
+            </div>
+             
+            <div class="col-md-8">
+            <label for="country" class="form-label">Enter Country</label>
+            <input name="listing[country]" placeholder="Enter country" type="text" id="country" class="form-control" required>
+            </div>
+        </div>
+        <br> 
+        <div>
+            <label for="location" class="form-label">Enter Place</label>
+            <input name="listing[location]" placeholder="Enter Location" type="text" id="place" class="form-control" required>
+        </div>
+        <br> 
+        <button class="btn button" >Add</button><br><br>
+    </form>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Discover Stays</a>
+        <a class="nav-link" href="/listings/new">List a Stay</a>
+        &nbsp;
+<form method="GET" action="/listings" class="d-flex mb-4" role="search">
+  <input 
+    class="form-control me-2" 
+    type="search" 
+    name="q" 
+    placeholder="Search by title, location, or country..." 
+    value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+    aria-label="Search"
+  />
+  <button class="btn btn-outline-success" type="submit">Search</button>
+  <button id="voiceBtn" type="button" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-microphone"></i></button>
+</form>
+
+
+      </div>
+      <div class="navbar-nav ms-auto">
+        <% if(!currentUser){ %>
+        <a class="nav-link"  href="/signup">Sign up</a>
+        <a class="nav-link" href="/login">Log in</a>
+        <% }else{ %>
+        <a class="nav-link" href="/logout">log out</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+  const voiceBtn = document.getElementById("voiceBtn");
+  const searchInput = document.querySelector("input[name='q']");
+
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+
+  voiceBtn.addEventListener("click", () => {
+    recognition.start();
+  });
+
+  recognition.addEventListener("result", (event) => {
+    const transcript = event.results[0][0].transcript;
+    searchInput.value = transcript;
+    document.querySelector("form[role='search']").submit();
+  });
+
+  recognition.addEventListener("error", (e) => {
+    console.error("🎤 Voice error:", e);
+  });
+</script>

@@ -1,0 +1,150 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+.navbar{
+    height: 5rem;
+    background-color: rgb(251, 220, 225);
+}
+
+.navbar-nav .btn{
+    height: 2rem;
+}
+
+.nav-link{
+    opacity: 1;
+}
+.nav-link:hover{
+    opacity: 0.6;
+}
+
+ .fa-compass{
+    opacity: 1;
+}
+ .fa-compass:hover{
+    opacity: 0.6;
+}
+
+.navbar-nav,
+.navbar-nav .nav-link,
+.navbar-nav form,
+.navbar-nav .btn,
+.navbar-nav input {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav form {
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    background-color: rgb(251, 220, 225); 
+    padding: 1rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .navbar-collapse.show {
+    background-color: rgb(251, 220, 225);
+    z-index: 1050;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 0 0 12px 12px;
+  }
+
+  .navbar {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+}
+
+
+.fa-compass{
+    color: rgb(170, 97, 109);
+    /* color: rgb(123, 180, 123); */
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: black !important;
+}
+
+/* footer */
+.f-info-links{
+    width: 100%;
+}
+.f-info-socials{
+    width: 100%;
+}
+.f-info-socials i{
+    margin-top: 1rem;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+.f-info-links a{
+    text-decoration: none;
+    color: hsl(0, 0%, 13%);
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+.f-info{
+    height: 8rem;
+    background-color: rgb(251, 220, 225);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    align-items: space-evenly;
+}
+/* card */
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+/* .card-body{
+    padding: 0 !important;
+}
+
+.card-text p{
+    font-weight: 400;
+} */
+.listing-link{
+    text-decoration: none;
+}
+/* card effects */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: pink;
+}
+
+/* button */
+.button{
+    background-color: rgb(170, 97, 109) !important;
+    color: white !important;
+}
+
+/* show route */
+.show-img{
+    height: 30vh;
+}
+.btn-class{
+    display: flex;
+    justify-content: space-evenly;
+}
