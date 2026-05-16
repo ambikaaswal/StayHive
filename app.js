@@ -20,7 +20,7 @@ const dbURL = process.env.DB_URL;
 //atlas url:
 const ATLAS_DB_URL = process.env.ATLAS_DB_URL;
 
-const store = MongoStore.create({
+const store = new MongoStore({
   mongoUrl: process.env.ATLAS_DB_URL,
   crypto: {
     secret: process.env.SECRET,
