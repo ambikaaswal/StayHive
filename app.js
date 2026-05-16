@@ -14,10 +14,33 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 const dbURL = process.env.DB_URL;
 //atlas url:
 const ATLAS_DB_URL = process.env.ATLAS_DB_URL;
+
+const store = MongoStore.create({
+  mongoUrl: process.env.ATLAS_DB_URL,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+app.use(session({
+  store,
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  }
+}));
+
 const port = process.env.PORT;
 async function main(){
     await mongoose.connect(ATLAS_DB_URL);
@@ -29,20 +52,10 @@ main()
     console.log(err);
 })
 
-const sessionOptions = {
-    secret: "secretcode",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000, //one week
-        maxAge: 7* 24 * 60 * 60 * 1000,
-        httpOnly: true
-    }
-};
 
 const User = require("./models/user.js");
 
-app.use(session(sessionOptions));
+
 app.use(flash());//should be added before routes
 
 app.use(passport.initialize());
@@ -100,5 +113,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, ()=>{
-    console.log("Server is listening....");
+    console.log(`Server is listening on port ${port}`);
 });
