@@ -18,7 +18,7 @@ const localStrategy = require("passport-local").Strategy;
 const dbURL = process.env.DB_URL;
 //atlas url:
 const ATLAS_DB_URL = process.env.ATLAS_DB_URL;
-const PORT = process.env.PORT;
+const port = process.env.PORT;
 async function main(){
     await mongoose.connect(ATLAS_DB_URL);
 }
@@ -99,6 +99,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("listings/Invalid", { message });
 });
 
-app.listen(PORT, ()=>{
-    console.log("Server is listening on port 8001");
+app.listen(port, ()=>{
+    console.log("Server is listening....");
 });
