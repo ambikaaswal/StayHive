@@ -14,33 +14,26 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
-const MongoStore = require("connect-mongo").default;
 
 const dbURL = process.env.DB_URL;
 //atlas url:
 const ATLAS_DB_URL = process.env.ATLAS_DB_URL;
 
-const store = MongoStore.create({
-  mongoUrl: process.env.ATLAS_DB_URL,
-  crypto: {
-    secret: process.env.SECRET,
-  },
-  touchAfter: 24 * 3600,
-});
+const sessionOptions = {
+    secret: "secretcode",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true
+    }
+};
 
-app.use(session({
-  store,
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
-  }
-}));
+app.use(session(sessionOptions));
 
-const port = process.env.PORT;
+const port = process.env.PORT|| 8001;
+
 async function main(){
     await mongoose.connect(ATLAS_DB_URL);
 }
