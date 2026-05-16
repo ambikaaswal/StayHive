@@ -14,13 +14,13 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo").default;
 
 const dbURL = process.env.DB_URL;
 //atlas url:
 const ATLAS_DB_URL = process.env.ATLAS_DB_URL;
 
-const store = new MongoStore({
+const store = MongoStore.create({
   mongoUrl: process.env.ATLAS_DB_URL,
   crypto: {
     secret: process.env.SECRET,
