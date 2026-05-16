@@ -9,11 +9,6 @@ const mongoose = require("mongoose");
 // };
 
 
-// module.exports.renderIndex = async(req,res)=>{ 
-//   const allListings = await Listing.find({});
-//  res.render("listings/index",{allListings}); 
-// };
-
 module.exports.renderIndex = async (req, res) => {
   const { q } = req.query;
   let allListings;

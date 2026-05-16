@@ -16,9 +16,11 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 
 const dbURL = process.env.DB_URL;
-
+//atlas url:
+const ATLAS_DB_URL = process.env.ATLAS_DB_URL;
+const PORT = process.env.PORT;
 async function main(){
-    await mongoose.connect(dbURL);
+    await mongoose.connect(ATLAS_DB_URL);
 }
 main()
 .then(()=>{
@@ -97,34 +99,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("listings/Invalid", { message });
 });
 
-app.listen(8000, ()=>{
-    console.log("Server is listening on port 8000");
+app.listen(PORT, ()=>{
+    console.log("Server is listening on port 8001");
 });
-
-
-//first test:
-// app.get("/testListing", async(req,res)=>{
-//     let sampleListing = new Listing({
-//         title: "New Villa",
-//         description: "Beside beach",
-//         image: String,
-//         price: 1200,
-//         location: "Calangute, Goa",
-//         country: "India",
-//     })
-//     await sampleListing.save();
-//     console.log("Sample saved");
-//     res.send("Successful testing.")
-// });
-
-
-// app.get("/demouser", async(req, res)=>{
-//     let fakeUser = new User({
-//         email: "stud@gmail.com",
-//         username: "stud"
-//     });
-//     let registeredUser = await User.register(fakeUser, "helo");
-//     res.send(registeredUser);
-// });
-
-
